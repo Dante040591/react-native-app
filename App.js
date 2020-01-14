@@ -6,7 +6,10 @@ import { StyleSheet, View } from 'react-native'
 
 export default function App() {
   const [todoId, setTodoId] = useState(null)
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([
+    {id: '1', title: 'Wake'},
+    {id: '2', title: 'Go'},
+  ])
   const addTodo = (title) => {
     setTodos((prev) => [...prev, {
       id: Date.now().toString(),
@@ -19,11 +22,17 @@ export default function App() {
   }
 
   let content = (
-    <MainScreen todos={todos} addTodo={addTodo} onRemove={onRemove} />
+    <MainScreen 
+      todos={todos} 
+      addTodo={addTodo} 
+      onRemove={onRemove} 
+      openTodo={(id) => setTodoId(id)} // тоже самое openTodo={setTodoId}
+    />
   )
 
   if (todoId) {
-    content = <TodoScreen/>
+    const selectedTodo = todos.find((todo) => todo.id === todoId)
+    content = <TodoScreen goBack={() => setTodoId(null)} todo={selectedTodo} />
   }
 
   return (
