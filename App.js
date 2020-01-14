@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Navbar } from './src/Navbar'
-import { Todo } from './src/Todo'
+import { TodoList } from './src/TodoList'
 import { TodoListItem } from './src/TodoListItem'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 
 export default function App() {
   const [todos, setTodos] = useState([])
@@ -13,15 +13,20 @@ export default function App() {
     }])
   }
 
+  const onRemove = (id) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
+
   return (
     <View>
       <Navbar />
       <View style={styles.app}>
-        <Todo onSubmit={addTodo} />
-
-        <View>
-          { todos.map(todo => <TodoListItem todo={todo} key={todo.id} /> )}
-        </View>
+        <TodoList onSubmit={addTodo} />
+        <FlatList 
+          data={todos}
+          renderItem={({item}) => <TodoListItem todo={item} removeTodoItem={onRemove} />}
+          keyExtractor={item => item.id}
+        />
       </View>
     </View>
   );

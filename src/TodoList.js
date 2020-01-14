@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import {View, TextInput, Button, StyleSheet} from 'react-native'
+import {View, TextInput, Button, StyleSheet, Alert} from 'react-native'
 
-export const Todo = ({onSubmit}) => {
+export const TodoList = ({onSubmit}) => {
   const [value, setValue]  = useState('')
 
   const pressHandler = () => {
@@ -9,17 +9,17 @@ export const Todo = ({onSubmit}) => {
       onSubmit(value)
       setValue('')
     } else {
-      //errrorr
+      Alert.alert('Название задачи не должно быть пустым!')
     }
   }
 
   return (
-    <View style={styles.todo}>
+    <View style={styles.todoList}>
       <TextInput
         style={styles.input}
         onChangeText={text => setValue(text)}
         value={value} 
-        placeholder="Что делать?"
+        placeholder="Введите название задачи?"
       />
       <Button title="Добавить" onPress={pressHandler} />
     </View>
@@ -27,7 +27,7 @@ export const Todo = ({onSubmit}) => {
 }
 
 const styles = StyleSheet.create({
-  todo: {
+  todoList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
