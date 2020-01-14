@@ -5,7 +5,7 @@ import { TodoScreen } from './src/screens/TodoScreen'
 import { StyleSheet, View } from 'react-native'
 
 export default function App() {
-  const [todoId, setTodoId] = useState(null)
+  const [todoId, setTodoId] = useState('2')
   const [todos, setTodos] = useState([
     {id: '1', title: 'Wake'},
     {id: '2', title: 'Go'},
