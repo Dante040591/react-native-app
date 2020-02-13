@@ -1,21 +1,21 @@
-import React from "react";
-import { TodoList } from "../components/TodoList";
-import { TodoListItem } from "../components/TodoListItem";
-import { StyleSheet, View, FlatList } from "react-native";
+import React from 'react'
+import { View, StyleSheet, FlatList } from 'react-native'
+import { AddTodo } from '../components/AddTodo'
+import { Todo } from '../components/Todo'
 
-export const MainScreen = ({ addTodo, todos, onRemove, openTodo }) => {
+export const MainScreen = ({todos, removeTodo, addTodo, openTodo}) => {
   return (
     <View>
-      <TodoList onSubmit={addTodo} />
+      <AddTodo onSubmit={addTodo}/>
       <FlatList
         data={todos}
-        renderItem={({ item }) => (
-          <TodoListItem todo={item} removeTodoItem={onRemove} onOpen={openTodo} />
-        )}
-        keyExtractor={item => item.id}
+        renderItem={({item}) => <Todo todo={item} onRemove={removeTodo} onOpen={openTodo}/>}
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
-  );
-};
+  )
+}
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+})

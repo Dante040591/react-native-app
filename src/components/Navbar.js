@@ -1,11 +1,13 @@
 import React from 'react'
-import { THEME } from '../theme';
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
+import { THEME } from '../theme'
 
-export const Navbar = (props) => {
+export const Navbar = ({title}) => {
   return (
     <View style={styles.navbar}>
-      <Text style={styles.text}>Todo App</Text>
+      <Text style={styles.text}>
+        {title}
+      </Text>
     </View>
   )
 }
@@ -13,13 +15,13 @@ export const Navbar = (props) => {
 const styles = StyleSheet.create({
   navbar: {
     height: 70,
-    alignItems: 'center',
     justifyContent: 'flex-end',
-    backgroundColor: THEME.MAIN_COLOR,
+    alignItems: 'center',
     paddingBottom: 10,
+    backgroundColor: THEME.MAIN_COLOR,
   },
   text: {
     color: '#fff',
-    fontSize: 20,
-  }
+    fontSize: 18,
+  },
 })
